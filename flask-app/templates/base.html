@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Home Monitoring{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static',filename='base.css')}}">
+    {% block css %}{% endblock %}
+</head>
+<nav>
+    <ul class="navlist">
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('thermostat.index')}}">Thermostat</a></li>
+        <li><a href="{{url_for('thermostat.program')}}">Thermostat Program</a></li>
+        <li><a href="{{url_for('dashboard.index')}}">Data Dashboard</a></li>
+    </ul>
+    {% block content %}{% endblock %}
+    {% block js %}{% endblock %}
+</nav>
+</html>

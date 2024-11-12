@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+Data Dashboard
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="{{url_for('dashboard.static',filename='index.css')}}">
+{% endblock %}
+
+{% block content %}
+<div id="content" style="position: relative;">
+    <h1 id="sensor_h1">Sensor:</label>
+    <select id="sensorDropdown">
+        {% for sensor in sensors %}
+        <option value="{{ sensor }}" {% if sensor == selected_sensor %}selected{% endif %}>{{ sensor }}</option>
+        {% endfor %}
+    </select>
+    
+    <h1 id="data_h1">Data</h1>
+    <select id="categoryDropdown">
+        {% for category in categories %}
+        <option value="{{ loop.index }}" {% if category == selected_category %}selected{% endif %}>{{ category }}</option>
+        {% endfor %}
+    </select>
+
+    <h1>Sensor Data Over Time</h1>
+    <!-- Embed Plotly figure -->
+    {{ plot|safe }}
+
+    <h1>Raw Data</h1>
+    {{ data|safe }}
+
+    {% endblock %}
+</div>
+
+{% block js %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{url_for('dashboard.static',filename='index.js')}}"></script>
+{% endblock %}
